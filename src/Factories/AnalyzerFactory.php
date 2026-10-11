@@ -2,7 +2,7 @@
 
 namespace Ninja\Sentinel\Factories;
 
-use EchoLabs\Prism\Prism;
+use Prism\Prism\Prism;
 use Illuminate\Contracts\Container\BindingResolutionException;
 use Ninja\Sentinel\Analyzers\AzureAI;
 use Ninja\Sentinel\Analyzers\Contracts\Analyzer;
