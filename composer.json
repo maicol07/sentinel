@@ -1,6 +1,6 @@
 {
     "name": "diego-ninja/sentinel",
-    "description": "A content moderation and sentiment analysis library for Laravel 10+",
+    "description": "A content moderation and sentiment analysis library for Laravel 11+",
 	"keywords": ["profanity", "filter", "strings", "swear", "language", "laravel", "content", "moderation"],
 	"license": "MIT",
     "homepage": "https://github.com/diego-ninja/sentinel",
