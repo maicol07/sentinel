@@ -153,7 +153,7 @@ final readonly class Language implements LanguageContract
         }, 0);
 
         foreach (['pronouns', 'markers', 'intensifiers', 'modifiers', 'quotes', 'excuses', 'common_words'] as $key) {
-            $details[$key] = array_unique($details[$key]);
+            $details[$key] = array_values(array_unique($details[$key]));
         }
 
         $details["total_language_elements"] = array_reduce($details, fn(int $carry, array|int|float $item): int => $carry + (is_array($item) ? count($item) : 0), 0);
