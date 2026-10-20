@@ -2,13 +2,6 @@
 
 namespace Ninja\Sentinel\Analyzers;
 
-use Prism\Prism\Enums\Provider;
-use Prism\Prism\Prism;
-use Prism\Prism\Providers\Anthropic\Enums\AnthropicCacheType;
-use Prism\Prism\Structured\PendingRequest as StructuredPendingRequest;
-use Prism\Prism\Text\PendingRequest as UnstructuredPendingRequest;
-use Prism\Prism\ValueObjects\Messages\SystemMessage;
-use Prism\Prism\ValueObjects\Messages\UserMessage;
 use InvalidArgumentException;
 use JsonException;
 use Ninja\Sentinel\Analyzers\Contracts\Analyzer;
@@ -21,6 +14,13 @@ use Ninja\Sentinel\Result\Contracts\Result;
 use Ninja\Sentinel\Schemas\SentinelPrismSchema;
 use Ninja\Sentinel\Services\Contracts\ServiceAdapter;
 use Ninja\Sentinel\Services\Pipeline\TransformationPipeline;
+use Prism\Prism\Enums\Provider;
+use Prism\Prism\Prism;
+use Prism\Prism\Providers\Anthropic\Enums\AnthropicCacheType;
+use Prism\Prism\Structured\PendingRequest as StructuredPendingRequest;
+use Prism\Prism\Text\PendingRequest as UnstructuredPendingRequest;
+use Prism\Prism\ValueObjects\Messages\SystemMessage;
+use Prism\Prism\ValueObjects\Messages\UserMessage;
 
 /**
  * LLM-based profanity checker using Laravel Prism.
@@ -150,8 +150,10 @@ final readonly class PrismAI implements Analyzer
                     provider: $provider,
                     model: $model,
                 )
-                ->withMessages([
+                ->withSystemPrompts([
                     (new SystemMessage($instructions))->withProviderOptions(['cacheType' => AnthropicCacheType::Ephemeral]),
+                ])
+                ->withMessages([
                     (new UserMessage($message))->withProviderOptions(['cacheType' => AnthropicCacheType::Ephemeral]),
                 ])
                 ->withClientOptions([
